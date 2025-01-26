@@ -22,8 +22,7 @@ bool is_q_empty(struct QUEUE *pq) {
 // Function to check if the queue is full
 bool is_q_full(struct QUEUE *pq) {
 			
-			printf(" is_q_full: tail index %d \n",pq->tail);
-     if((pq->tail + 1) % QUEUESIZE== pq->head)
+		if((pq->tail + 1) % QUEUESIZE== pq->head)
      {
      	 return true; 
      }

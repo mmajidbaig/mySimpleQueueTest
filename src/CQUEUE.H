@@ -6,6 +6,8 @@
 #define QUEUESIZE 5 // 20
 
 typedef uint8_t byte;
+//typedef uint8_t byte;
+
 
 struct QUEUE
 {

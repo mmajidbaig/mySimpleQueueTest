@@ -1,12 +1,48 @@
+#include "../unity/src/unity.h"
 #include "../src/cqueue.h"
 
 #include <stdio.h>
 #include <stdint.h>
 #include <stdbool.h>
 
-typedef uint8_t byte;
+
+void setUp() {}
+void tearDown() {}
+
 
 //#define QUEUESIZE 5 // Reduced size for easier testing
+
+
+void test_queue_initialization()
+	 {
+    struct QUEUE q;
+    init_q(&q);
+    TEST_ASSERT_NOT_NULL(&q);
+    TEST_ASSERT_EQUAL_INT(0, q.head);
+    TEST_ASSERT_EQUAL_INT(0, q.tail);
+    TEST_ASSERT_EQUAL_INT(5, QUEUESIZE);
+  }
+
+
+void test_fill_queue() {
+    
+    struct QUEUE q;
+    init_q(&q);
+    TEST_ASSERT_TRUE(put_q(10,&q));
+    TEST_ASSERT_TRUE(put_q(20,&q));
+    TEST_ASSERT_FALSE(is_q_empty(&q));
+
+    //int value;
+    //TEST_ASSERT_TRUE(queue_dequeue(q, &value));
+    //TEST_ASSERT_EQUAL_INT(10, value);
+
+    //TEST_ASSERT_TRUE(queue_dequeue(q, &value));
+    //TEST_ASSERT_EQUAL_INT(20, value);
+
+    //TEST_ASSERT_TRUE(queue_is_empty(q));
+    
+}
+
 
 
 // Display the queue's contents
@@ -19,7 +55,7 @@ void display_q(struct QUEUE *pq) {
     uint16_t i = pq->head;
     while (i != pq->tail) {
         printf("%d ", pq->buf[i]);
-        i = (i + 1) % QUEUESIZE;
+        i = (i + 1);
     }
     printf("\n");
 }
@@ -28,8 +64,15 @@ void display_q(struct QUEUE *pq) {
 int main() {
     struct QUEUE q;
     init_q(&q);//initializing the queue
-
-    // Test adding elements to the queue
+		printf("My testing code \n");
+		
+		
+		UNITY_BEGIN();
+  	RUN_TEST(test_queue_initialization);
+  	RUN_TEST(test_fill_queue);
+    return UNITY_END();
+		
+    /*// Test adding elements to the queue
     printf("Adding elements to the queue:\n");
     for (byte i = 1; i <= 5; i++) {
         if (put_q(i, &q) == 0) {
@@ -54,5 +97,5 @@ int main() {
 
     display_q(&q);
   
-    return 0;
+    return 0;*/
 }

@@ -21,6 +21,8 @@ bool is_q_empty(struct QUEUE *pq) {
 
 // Function to check if the queue is full
 bool is_q_full(struct QUEUE *pq) {
+			
+			printf(" is_q_full: tail index %d \n",pq->tail);
      if((pq->tail + 1) % QUEUESIZE== pq->head)
      {
      	 return true; 
@@ -33,9 +35,11 @@ int put_q(byte c, struct QUEUE *pq)
 {
 	 //byte t;
 	if (is_q_full(pq)) {
+        printf("Queue is full\n");
         return -1; // Queue is full
-    }
+         }
  	 pq->buf[pq->tail] = c;
+ 	 printf(" put_q: queue data :%d at index %d \n",pq->buf[pq->tail], pq->tail);
    pq->tail = (pq->tail + 1)% QUEUESIZE;
    return 0;//Success
  

@@ -51,6 +51,23 @@ void test_fill_queue() {
     display_q(&q); 
 }
 
+
+void test_is_queue_full() {
+    
+    struct QUEUE q;
+    init_q(&q);
+    
+    TEST_ASSERT_FALSE(put_q(10,&q));
+    TEST_ASSERT_FALSE(put_q(20,&q));
+    TEST_ASSERT_FALSE(put_q(30,&q));
+    TEST_ASSERT_FALSE(put_q(40,&q));
+    TEST_ASSERT_FALSE(put_q(50,&q));
+    TEST_ASSERT_TRUE(put_q(60,&q));
+    //TEST_ASSERT_FALSE(is_q_empty(&q));  
+    display_q(&q); 
+}
+
+
 void test_de_queue() {
     
     struct QUEUE q;
@@ -77,5 +94,6 @@ int main() {
   	RUN_TEST(test_queue_initialization);
   	RUN_TEST(test_fill_queue);
   	RUN_TEST(test_de_queue);
+  	RUN_TEST(test_is_queue_full);
   	return UNITY_END();
 		}

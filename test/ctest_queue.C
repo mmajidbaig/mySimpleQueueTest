@@ -12,6 +12,21 @@ void tearDown() {}
 
 //#define QUEUESIZE 5 // Reduced size for easier testing
 
+void display_q(struct QUEUE *pq)
+ {
+    printf(" display\n");
+    if (is_q_empty(pq)) {
+        printf("Queue is empty.\n");
+        return;
+    }
+    printf("Queue contents: ");
+    uint16_t i = pq->head;
+    while (i != pq->tail) {
+        printf("%d ", pq->buf[i]);
+        i = (i + 1)% QUEUESIZE;
+    }
+    printf("\n");
+}
 
 void test_queue_initialization()
 	 {
@@ -28,61 +43,45 @@ void test_fill_queue() {
     
     struct QUEUE q;
     init_q(&q);
-    TEST_ASSERT_TRUE(put_q(10,&q));
-    TEST_ASSERT_TRUE(put_q(20,&q));
-    TEST_ASSERT_FALSE(is_q_empty(&q));
-
-    //int value;
-    //TEST_ASSERT_TRUE(queue_dequeue(q, &value));
-    //TEST_ASSERT_EQUAL_INT(10, value);
-
-    //TEST_ASSERT_TRUE(queue_dequeue(q, &value));
-    //TEST_ASSERT_EQUAL_INT(20, value);
-
-    //TEST_ASSERT_TRUE(queue_is_empty(q));
-    
+    //display_q(&q);
+    TEST_ASSERT_TRUE(is_q_empty(&q));
+    TEST_ASSERT_FALSE(put_q(10,&q));
+    TEST_ASSERT_FALSE(put_q(20,&q));
+       
+       
 }
 
 
 
 // Display the queue's contents
-void display_q(struct QUEUE *pq) {
-    if (is_q_empty(pq)) {
-        printf("Queue is empty.\n");
-        return;
-    }
-    printf("Queue contents: ");
-    uint16_t i = pq->head;
-    while (i != pq->tail) {
-        printf("%d ", pq->buf[i]);
-        i = (i + 1);
-    }
-    printf("\n");
-}
+
 
 // Main function to test the queue
 int main() {
     struct QUEUE q;
     init_q(&q);//initializing the queue
 		printf("My testing code \n");
-		
+		display_q(&q);
 		
 		UNITY_BEGIN();
   	RUN_TEST(test_queue_initialization);
   	RUN_TEST(test_fill_queue);
+  	display_q(&q);
     return UNITY_END();
 		
-    /*// Test adding elements to the queue
+    // Test adding elements to the queue
+    /*
     printf("Adding elements to the queue:\n");
     for (byte i = 1; i <= 5; i++) {
-        if (put_q(i, &q) == 0) {
+        if (put_q(i, &q)==0) {
             printf("Added %d\n", i);
-        } else {
+            } else {
             printf("Queue is full, could not add %d\n", i);
         }
     }
 
     display_q(&q);
+    
 
     // Test removing elements from the queue
     printf("\nRemoving elements from the queue:\n");
@@ -97,5 +96,6 @@ int main() {
 
     display_q(&q);
   
-    return 0;*/
+    return 0;
+    */
 }

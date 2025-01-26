@@ -1,5 +1,6 @@
 #include "cqueue.h"
 //#include <stdbool.h>
+#include <stdio.h>
 
 // Function to initialize the queue 
 
@@ -13,12 +14,18 @@ void init_q(struct QUEUE *pq)
 
 // Function to check if the queue is empty
 bool is_q_empty(struct QUEUE *pq) {
-    return pq->head == pq->tail;
+    
+    return (pq->head == pq->tail);
+        
 }
 
 // Function to check if the queue is full
 bool is_q_full(struct QUEUE *pq) {
-    return (pq->tail + 1) == pq->head;
+     if((pq->tail + 1) % QUEUESIZE== pq->head)
+     {
+     	 return true; 
+     }
+     return false;
 }
 
 
@@ -28,10 +35,9 @@ int put_q(byte c, struct QUEUE *pq)
 	if (is_q_full(pq)) {
         return -1; // Queue is full
     }
- 	
-   pq->buf[pq->tail] = c;
-   pq->tail = pq->tail + 1;
-   return 0;
+ 	 pq->buf[pq->tail] = c;
+   pq->tail = (pq->tail + 1)% QUEUESIZE;
+   return 0;//Success
  
 }
 
@@ -62,7 +68,7 @@ int get_q(struct QUEUE *pq, byte *data) {
     if (is_q_empty(pq)) {
         return -1; // Queue is empty
     }
-    *data = pq->buf[pq->head++];
-    //pq->head = (pq->head + 1) % QUEUESIZE;
+    *data = pq->buf[pq->head];
+  	pq->head = (pq->head + 1) % QUEUESIZE;
     return 0; // Success
 }

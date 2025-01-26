@@ -47,10 +47,20 @@ void test_fill_queue() {
     TEST_ASSERT_TRUE(is_q_empty(&q));
     TEST_ASSERT_FALSE(put_q(10,&q));
     TEST_ASSERT_FALSE(put_q(20,&q));
-       
-       
+    TEST_ASSERT_FALSE(is_q_empty(&q));    
 }
 
+void test_de_queue() {
+    
+    struct QUEUE q;
+    init_q(&q);
+    byte  data;
+    TEST_ASSERT_FALSE(get_q(&q,&data));
+    //TEST_ASSERT_EQUAL_INT8(10,data);
+    //TEST_ASSERT_FALSE(get_q(&q,&data));
+    //TEST_ASSERT_EQUAL_INT8(20,data);
+        
+}
 
 
 // Display the queue's contents
@@ -66,6 +76,7 @@ int main() {
 		UNITY_BEGIN();
   	RUN_TEST(test_queue_initialization);
   	RUN_TEST(test_fill_queue);
+  	RUN_TEST(test_de_queue);
   	display_q(&q);
     return UNITY_END();
 		

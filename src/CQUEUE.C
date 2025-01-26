@@ -66,9 +66,12 @@ int check_q(struct QUEUE *pq)
 
 int get_q(struct QUEUE *pq, byte *data) {
     if (is_q_empty(pq)) {
+        printf(" get_q: queue empty\n");
         return -1; // Queue is empty
+        
     }
     *data = pq->buf[pq->head];
   	pq->head = (pq->head + 1) % QUEUESIZE;
+  	printf(" get_q: queue data :%d \n",*data);
     return 0; // Success
 }

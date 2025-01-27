@@ -1,0 +1,5 @@
+#ignoring files
+*.exe
+*.txt
+*.o
+*.Bak

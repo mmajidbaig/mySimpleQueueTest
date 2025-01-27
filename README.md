@@ -6,10 +6,16 @@ This project implements a simple queue module in C using Unity Framework for tes
 - Enqueue and dequeue elements.
 - Check if the queue is empty or full.
 
-## Development Process
-The project includes  
-- A failing test.
-- Code to pass the test.
+## The project includes  
+- Note: for Testing Purpose QUEUESIZE is defined as 5 only.
+-  test for: 
+		-is_queue_empty: check if queue is empty.
+		-queue_initialization : Initializing the queue
+  	-test_fill_queue: Putting values in the queue
+  	-de_queue: Removing the values from the queue
+  	-is_queue_full: Checking if queue is full
+- Code of failing test.
+-Code to pass the test.
 - Refactoring 
 
 ## Testing Framework
